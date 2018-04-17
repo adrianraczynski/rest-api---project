@@ -41,11 +41,7 @@ public class TrelloClient {
 
     public List<TrelloBoardDto> getTrelloBoards() {
 
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/adrianraczynski/boards")
-                .queryParam("key", trelloAppKey)
-                .queryParam("token", trelloToken)
-                .queryParam("fields", "name,id")
-                .queryParam("lists", "all").build().encode().toUri();
+        URI url = urlExercise182();
 
         try {
             TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
@@ -54,8 +50,6 @@ public class TrelloClient {
             LOGGER.error(e.getMessage(), e);
             return new ArrayList<>();
         }
-
-
 
         // Zad 18.1
         //if (boardsResponse != null) {
@@ -66,9 +60,7 @@ public class TrelloClient {
 
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
 
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
-                .queryParam("key", trelloAppKey)
-                .queryParam("token", trelloToken)
+        URI url = basicComponentBuilder ( "/cards")
                 .queryParam("name", trelloCardDto.getName())
                 .queryParam("desc", trelloCardDto.getDescription())
                 .queryParam("pos", trelloCardDto.getPos())
@@ -81,11 +73,18 @@ public class TrelloClient {
 
     private URI urlExercise182() {
 
-        URI url =  UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/adrianraczynski/boards")
-                .queryParam("key", trelloAppKey)
-                .queryParam("token", trelloToken)
-                .queryParam("fields", "name,id").build().encode().toUri();
+        //URI url =  UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + username + "/boards")
+        //        .queryParam("key", trelloAppKey)
+        //       .queryParam("token", trelloToken)
+        return basicComponentBuilder ("/members/" + username + "/boards")
+                    .queryParam("fields", "name,id")
+                    .queryParam("lists", "all").build().encode().toUri();
+    }
 
-        return url;
+    private UriComponentsBuilder basicComponentBuilder (String path) {
+
+        return UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + path)
+                    .queryParam("key", trelloAppKey)
+                    .queryParam("token", trelloToken);
     }
 }

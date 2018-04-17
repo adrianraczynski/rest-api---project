@@ -41,7 +41,7 @@ public class TrelloController {
 
     //zad 18.2
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards182")
-    public List<TrelloBoardDto> getTrelloBoards182() throws TaskNotFoundException {                                             // zadanie moduł 18.2 tutaj metoda będzie typu List<TrelloBoardDto>
+    public List<TrelloBoardDto> getTrelloBoards182() {                                             // zadanie moduł 18.2 tutaj metoda będzie typu List<TrelloBoardDto>
                                                                                                   // metoda będzie zwracać (return) po filtracji obiekt trelloBoards
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
