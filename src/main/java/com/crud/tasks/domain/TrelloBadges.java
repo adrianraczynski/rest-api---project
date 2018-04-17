@@ -15,7 +15,6 @@ public class TrelloBadges {
     @JsonProperty("votes")
     private int votes;
 
-    @JsonProperty("attachments")
-    private TrelloAttachmentsByType attachments;
-
+    @JsonProperty("attachmentsByType")
+    private TrelloAttachmentsByType attachmentsByType;
 }
