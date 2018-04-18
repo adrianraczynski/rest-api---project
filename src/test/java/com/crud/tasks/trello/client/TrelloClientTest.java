@@ -92,7 +92,7 @@ public class TrelloClientTest {
         assertEquals("http://test.com", newCard.getShortURL());
     }
 
-    /**
+
     @Test
     public void shouldReturnEmptyList() throws URISyntaxException {
         //Given
@@ -105,6 +105,6 @@ public class TrelloClientTest {
 
         //Then
         assertEquals(0, fetchedTrelloBoards.size());
-    }   **/
+    }
 
 }
