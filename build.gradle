@@ -28,8 +28,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.projectlombok:lombok')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.postgresql:postgresql')									// odkomentowane dla wrzucenia na heroku moduł 19.1 (po module zakomentować)
-    //compile('mysql:mysql-connector-java')									// zakomentowane dla wrzucenia na heroku moduł 19.1 (po module odkomentować)
+	//compile('org.postgresql:postgresql')
+    compile('mysql:mysql-connector-java')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	//providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
