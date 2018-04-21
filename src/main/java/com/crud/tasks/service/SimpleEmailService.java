@@ -21,7 +21,8 @@ public class SimpleEmailService {
         LOGGER.info("Starting email preparation...");
 
         try {
-            SimpleMailMessage mailMessage = createMailMessage (mail);
+
+            SimpleMailMessage mailMessage = createMailMessage(mail);
             javaMailSender.send(mailMessage);
             LOGGER.info("Email has been sent.");
 
@@ -35,6 +36,14 @@ public class SimpleEmailService {
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
+
+        if (mail.getToCc() == null) {
+            LOGGER.info("Cc field is empty!");
+
+        } else {
+            mailMessage.setCc(mail.getToCc());
+            LOGGER.info("The Cc field has been filled out.");
+        }
         return mailMessage;
     }
 }
