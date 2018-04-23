@@ -39,7 +39,7 @@ public class EmailScheduler {
                 adminConfig.getAdminMail(),
                 SUBJECT,
                 mailContents + TASKS,
-                ""
+                null
         ));
     }
 }
