@@ -33,12 +33,14 @@ public class EmailScheduler {
 
         if (size == 1) {
             mailContents = mailContents + TASK;
+        } else {
+            mailContents = mailContents + TASKS;
         }
 
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
-                mailContents + TASKS,
+                mailContents,
                 null
         ));
     }
