@@ -1,6 +1,6 @@
 package com.crud.tasks.trello.client;
 
-import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.config.TrelloConfig;
@@ -50,7 +50,7 @@ public class TrelloClient {
         //return new ArrayList<>();
     }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
 
         URI url = basicUriComponentBuilder ( "/cards")
                 .queryParam("name", trelloCardDto.getName())
@@ -58,7 +58,7 @@ public class TrelloClient {
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
 
-        return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+        return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
 
     }
 
