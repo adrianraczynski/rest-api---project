@@ -13,13 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class DBServiceTestSuite {
 
     @InjectMocks
     DbService dbService;
+
+    @InjectMocks
+    TaskRepository repositoryMock;
 
     @Mock
     TaskRepository taskRepository;
@@ -83,6 +86,6 @@ public class DBServiceTestSuite {
         dbService.deleteTask(1L);
 
         //Then
-        Assert.assertEquals(0, taskList.size());
+        verify(dbService.deleteTask(1L), times(1)).repositoryMock.delete(1L);   //nie rozumiem tego???
     }
 }
