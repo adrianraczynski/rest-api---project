@@ -21,9 +21,6 @@ public class DBServiceTestSuite {
     @InjectMocks
     DbService dbService;
 
-    @InjectMocks
-    TaskRepository repositoryMock;
-
     @Mock
     TaskRepository taskRepository;
 
@@ -77,8 +74,6 @@ public class DBServiceTestSuite {
         //Given
         Task taskExample = new Task (1L, "a", "b");
 
-        when(dbService.saveTask(taskExample)).thenReturn(taskExample);
-
         List<Task> taskList = new ArrayList<>();
         taskList.add(taskExample);
 
@@ -86,6 +81,6 @@ public class DBServiceTestSuite {
         dbService.deleteTask(1L);
 
         //Then
-        verify(dbService.deleteTask(1L), times(1)).repositoryMock.delete(1L);   //nie rozumiem tego???
+        verify(taskRepository).delete(1L);
     }
 }
