@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+//import org.apache.commons.lang3.StringUtils;
 
 
 @Service
@@ -35,8 +36,6 @@ public class SimpleEmailService {
     private SimpleMailMessage createMailMessage (final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
-        mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
 
         if (mail.getToCc() == null) {
             LOGGER.info("Cc field is empty!");
@@ -45,6 +44,10 @@ public class SimpleEmailService {
             mailMessage.setCc(mail.getToCc());
             LOGGER.info("The Cc field has been filled out.");
         }
+
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
+
         return mailMessage;
     }
 }
