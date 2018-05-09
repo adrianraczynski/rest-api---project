@@ -7,6 +7,7 @@ import com.crud.tasks.service.DbService;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -122,7 +123,7 @@ public class TaskControllerTestSuite {
         Task task = new Task(1L, "testTask1", "contentTask1");
         TaskDto taskDto = new TaskDto(1L, "testTask1", "contentTask1");
 
-        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
+        when(taskMapper.mapToTask(Mockito.any(TaskDto.class))).thenReturn(task);
         when(service.saveTask(task)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
 
@@ -135,7 +136,7 @@ public class TaskControllerTestSuite {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(0)))
+                .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("testTask1")))
                 .andExpect(jsonPath("$.content", is("contentTask1")));
     }
@@ -146,8 +147,8 @@ public class TaskControllerTestSuite {
         Task task = new Task(1L, "testTask1", "contentTask1");
         TaskDto taskDto = new TaskDto(1L, "testTask1", "contentTask1");
 
-        //when(taskMapper.mapToTask(taskDto)).thenReturn(task);
-        //when(service.saveTask(task)).thenReturn(taskDto);
+        when(taskMapper.mapToTask(Mockito.any(TaskDto.class))).thenReturn(task);
+        when(service.saveTask(task)).thenReturn(task);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(task);
